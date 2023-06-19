@@ -1,0 +1,42 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    providers:
+        users_in_memory:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        api:
+            pattern: ^/api/
+            stateless: true
+            custom_authenticator: App\Security\ApiTokenAuthenticator
+            provider: users_in_memory
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: users_in_memory
+            custom_authenticator:
+                - App\Security\AppCustomAuthentificator
+            logout:
+                path: app_logout
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/, roles: ROLE_USER }
+
+when@test:
+    security:
+        password_hashers:
+
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4
+                time_cost: 3
+                memory_cost: 10
+
+            role_hierarchy:
+                algorithm: auto

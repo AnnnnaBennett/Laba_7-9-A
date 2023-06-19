@@ -1,0 +1,11 @@
+<div class="form-container form-publicAnswer">
+    {{ form_start(formAnswer, { 'attr': {'class': 'form '} }) }}
+    {{ form_widget(formAnswer.text, { 'attr': {'placeholder': 'Ваш ответ'}, 'label': ' ' }) }}
+    {% if not formAnswer.vars.valid %}
+        {% for error in formAnswer.vars.errors.form.getErrors(true) %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+        {% endfor %}
+    {% endif %}
+    <button type="submit" class="btn btn-primary btn-lg">Ответить</button>
+    {{ form_end(formAnswer) }}
+</div>

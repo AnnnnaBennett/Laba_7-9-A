@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('header.html.twig') }}
+
+    <section class="container mainPage">
+        <h1 class="mainPage-title">Вопросы</h1>
+        <div class="questions">
+            {% for question in questions | reverse %}
+                {% if question.toshow %}
+                    <a href="/questions/{{ question.id }}" class="question">
+                        <div class="question__date">{{ question.date|date("d.m.Y") }}</div>
+
+                        <div class="question__main">
+                            <div class="question__title">{{ question.title }}</div>
+                        </div>
+
+                        <div class="question__info">
+                            <div class="question__category">#{{ question.category }}</div>
+                            <div class="question__answers-numbers">
+                                {{ question.answers|length }} <img src="{{ asset('img/answers.svg') }}" alt="">
+                            </div>
+                        </div>
+
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

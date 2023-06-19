@@ -1,0 +1,45 @@
+.header {
+    background: white;
+}
+
+.header__wrapper{
+    max-width: 1320px;
+    padding-inline: 20px;
+    height: 80px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
+.header__logo{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 36px;
+}
+
+.menu-pc{
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+
+    font-family: 'JostMedium', sans-serif;
+}
+
+.menu-pc__item{
+    font-size: 20px;
+    padding: 0.5em;
+    /*background: #3030ec;*/
+    color: whitesmoke !important;
+    transition: 0.2s all ease-in-out;
+
+    border-radius: 0.25em;
+}
+
+.menu-pc__item:hover{
+    filter: brightness(80%);
+}

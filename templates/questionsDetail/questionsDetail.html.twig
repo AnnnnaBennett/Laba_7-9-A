@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}Вопрос{% endblock %}
+{% block body %}
+    {{ include('header.html.twig') }}
+    <section class="container question-page">
+        <h1 class="question-page-title">Вопрос</h1>
+        <div class="question-page__question">
+            <div class="question-author">
+                <img src="{{asset('img/user.svg')}}" alt="">
+                {{question.user.name}}
+            </div>
+
+            <div class="question-main">
+                <h2 class="question-title">
+                    {{question.title}}
+                </h2>
+                <div class="question-text">{{question.text}}</div>
+            </div>
+            <div class="question-info">
+                <div>#{{question.category}}</div>
+                <div>{{question.date|date("H:i d.m.Y")}}</div>
+            </div>
+        </div>
+
+        <div class="answers">
+            <h1>{{question.answers|length}} ответ(а/ов) на вопрос </h1>
+
+            {% if app.user %}
+                {{ include('publicAnswer/publicAnswer.html.twig') }}
+            {% endif %}
+            {% for answer in question.answers %}
+            <div class="answer-main">
+                <div class="question-author">
+                    <img src="{{asset('img/user.svg')}}" alt="">
+                    {{answer.user.name}}
+                </div>
+
+                <div class="answer-text">{{answer.text}}</div>
+                <div class="answer-date">{{answer.date|date("H:i d.m.Y")}}</div>
+            </div>
+                <hr>
+            {% endfor %}
+        </div>
+
+    </section>
+{% endblock %}

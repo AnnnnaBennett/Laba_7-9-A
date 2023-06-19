@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+    {{ include('header.html.twig') }}
+    <div class="container">
+        <div class="form-container">
+            <h1 class="form-title">Регистрация</h1>
+            {{ form_start(registrationForm, { 'attr': {'class': 'registration-from form'} }) }}
+            {{ form_widget(registrationForm.email, { 'attr': {'placeholder': 'email', 'autofocus': ''}, 'label': ' ' }) }}
+            {{ form_widget(registrationForm.name, { 'attr': {'placeholder': 'Логин'}, 'label': ' ' }) }}
+            {{ form_widget(registrationForm.plainPassword, { 'attr': {'placeholder': 'Пароль'}, 'label': ' ' }) }}
+            {{ form_row(registrationForm.agreeTerms, { 'attr': {'class': 'checkbox'}, 'label': 'Согласен на обработку персональных данных' }) }}
+            {% if not registrationForm.vars.valid %}
+                <ul>
+                    {% for error in registrationForm.vars.errors.form.getErrors(true) %}
+                        <li class="error">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+            {{ form_end(registrationForm) }}
+        </div>
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Добавление вопроса{% endblock %}
+
+{% block body %}
+    {{ include('header.html.twig') }}
+    <div class="container">
+        <div class="form-container">
+            <h1 class="form-title">Добавление вопроса</h1>
+            {{ form_start(formQuestion, { 'attr': {'class': 'form form-publicQuestion'} }) }}
+            {{ form_widget(formQuestion.title, { 'attr': {'placeholder': 'Название вопроса', 'autofocus': ''}, 'label': ' ' }) }}
+            {{ form_widget(formQuestion.text, { 'attr': {'placeholder': 'Текст вопроса'}, 'label': ' ' }) }}
+            {{ form_widget(formQuestion.category, { 'attr': {'placeholder': 'Категория вопроса'}, 'label': ' ' }) }}
+            {% if not formQuestion.vars.valid %}
+                {% for error in formQuestion.vars.errors.form.getErrors(true) %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-lg">Добавить вопрос</button>
+            {{ form_end(formQuestion) }}
+        </div>
+    </div>
+{% endblock %}
+

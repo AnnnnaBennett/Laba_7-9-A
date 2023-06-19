@@ -1,0 +1,24 @@
+<header class="header">
+    <div class="header__wrapper">
+
+        <a href="/" class="header__logo">
+            Вопрос/ответ
+        </a>
+
+        {% if app.user %}
+            Приветствую, {{ app.user.email }}
+                <nav class="menu-pc header__menu">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="/admin" target="_blank" class="btn btn-primary menu-pc__item">Админ панель</a>
+                    {% endif %}
+                    <a href="/publicQuestion" class="btn btn-primary menu-pc__item" id="btn-publicQuestion">Добавить вопрос</a>
+                    <a href="/logout" class="btn btn-danger menu-pc__item">Выйти</a>
+                </nav>
+        {% else %}
+            <nav class="menu-pc header__menu">
+                <a href="/register" class="btn btn-primary menu-pc__item" id="btn-registration">Зарегистрироваться</a>
+                <a href="/login" class="btn btn-primary menu-pc__item" id="btn-authorization">Войти</a>
+            </nav>
+        {% endif %}
+    </div>
+</header>
